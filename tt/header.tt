@@ -3,19 +3,19 @@
 </div>
 <div id="container">
     <div id="banner">
-        <h1><a href="./">[% |loc %]Bobby Tables: A guide to preventing SQL injection[% END %]</a></h1>
+        <h1><a href="./">Bobby Tables: Příručka k předcházení SQL injection</a></h1>
     </div>
     <!--
     <div id="subnav">
         <ul>
             <li>
-            <a href="#">About Bobby Tables</a>
+            <a href="#">O Bobby Tables</a>
             </li>
             <li>
-            <a href="#">About SQL Injection</a>
+            <a href="#">O SQL injection</a>
             </li>
             <li>
-            <a href="#">The Right Way To Do It</a>
+            <a href="#">Jak to dělat správně</a>
             </li>
         </ul>
     </div>
