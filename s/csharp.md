@@ -1,7 +1,7 @@
 C\#
 ===
 
-From the [C# Online](http://en.csharp-online.net/) wiki page [ASP.NET Security Hacks--Avoiding SQL Injection](http://en.csharp-online.net/ASP.NET_Security_Hacks%E2%80%94Avoiding_SQL_Injection)
+Z wiki stránky [ASP.NET Security Hacks--Avoiding SQL Injection](http://en.csharp-online.net/ASP.NET_Security_Hacks%E2%80%94Avoiding_SQL_Injection) na [C# Online](http://en.csharp-online.net/):
 
 
     SqlCommand userInfoQuery = new SqlCommand(
@@ -9,12 +9,12 @@ From the [C# Online](http://en.csharp-online.net/) wiki page [ASP.NET Security H
         someSqlConnection);
 
     SqlParameter userNameParam = userInfoQuery.Parameters.Add("@UserName",
-        SqlDbType.VarChar, 25 /* max length of field */ );
+        SqlDbType.VarChar, 25 /* maximální délka pole */ );
 
-    // userName is some string valued user input variable
+    // userName je nějaká řetězcová proměnná obsahující uživatelský vstup
     userNameParam.Value = userName;
 
-Or simpler:
+Nebo jednodušeji:
 
 
     String username = "joe.bloggs";
