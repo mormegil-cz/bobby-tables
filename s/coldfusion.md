@@ -1,7 +1,7 @@
 ColdFusion
 ==========
 
-In ColdFusion there is a tag called `cfqueryparam` that should be used whenever writing inline queries.
+V ColdFusion existuje značka `cfqueryparam`, která by se měla používat u všech inline dotazů.
 
     <cfquery name="queryTest">
     SELECT FirstName, LastName, Phone
@@ -11,10 +11,10 @@ In ColdFusion there is a tag called `cfqueryparam` that should be used whenever 
     </cfquery>
 
 
-Stored procedures can be invoked with the `cfstoredproc` and `cfprocparam` tags.
+Uložené procedury lze vyvolat pomocí značek `cfstoredproc` a `cfprocparam`.
 
-Recent versions of ColdFusion provide a set of functions to run queries that
-have a slightly different syntax, but still provide parameterized queries.
+Novější verze ColdFusion poskytují sadu funkcí pro spouštění dotazů, které
+mají mírně odlišnou syntaxi, ale stále umožňují parametrizované dotazy.
 
 
     <cfscript>
