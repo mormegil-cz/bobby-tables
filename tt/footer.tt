@@ -2,9 +2,9 @@
 <p>
 [% PROCESS translations.tt %]
 </p>
-<p>[% |loc %]This site's content is available under the <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 License</a>[% END %].</p>
+<p>Obsah tohoto webu je dostupný za podmínek <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.cs">licence Creative Commons Uveďte autora-Zachovejte licenci 3.0</a>.</p>
 </div>
-<a href="http://github.com/petdance/bobby-tables"><img
-    src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="[% |loc %]Fork me on GitHub[% END %]"
+<a href="http://github.com/mormegil-cz/bobby-tables"><img
+    src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Forkuj mě na GitHubu"
     height="149" width="149"
     /></a>
