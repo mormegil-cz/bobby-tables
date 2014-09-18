@@ -1,7 +1,7 @@
 ASP
 ===
 
-Older ASP uses positional placeholders.
+Staré ASP používá poziční náhrady.
 
     objCmd.CommandType = adCmdText;
     objCmd.CommandText = "UPDATE members SET photo = ? WHERE memberID = ?";
@@ -10,7 +10,7 @@ Older ASP uses positional placeholders.
     objCmd.Execute(adExecuteNoRecords);
 
 
-Newer ASP (ASP.Net?) can handle named placeholders.
+Novější ASP (ASP.Net?) zvládá pojmenované náhrady.
 
     objCmd.CommandType = adCmdText;
     objCmd.CommandText = "UPDATE members SET photo = @filename WHERE memberID = @memberID";
@@ -19,7 +19,7 @@ Newer ASP (ASP.Net?) can handle named placeholders.
     objCmd.Execute(adExecuteNoRecords);
     gblDelobjParams(objCmd);
 
-To do
+Chybí
 -----
 
-Add some narrative
+Přidat povídání
