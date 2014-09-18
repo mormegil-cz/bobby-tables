@@ -1,34 +1,34 @@
-# About Bobby Tables and SQL injection
+# O Bobbym Tablesovi a SQL injection
 
-# Why did Bobby's school lose their records?
+# Proč Bobbyho škola přišla o údaje o studentech?
 
-The school apparently stores the names of their students in a table called Students. When a new student arrives, the school inserts his/her name into this table. The code doing the insertion might look as follows:
+Škola patrně ukládá jména studentů do tabulky nazvané _Students_. Když nastoupí nový student, škola do této tabulky vloží jeho jméno. Kód, který to dělá, může vypadat nějak takhle:
 
     $sql = "INSERT INTO Students (Name) VALUES ('" . $studentName . "');";
     execute_sql($sql);
 
-The first line creates a string containing an SQL INSERT statement. The content of the `$studentName` variable is glued into the SQL statement. The second line sends the resulting SQL statement to the database. The pitfall of this code is that outside data, in this case the content of `$studentName`, becomes part of the SQL statement.
+První řádka připraví řetězec obsahující SQL příkaz `INSERT`. Obsah proměnné `$studentName` je vlepen do tohoto SQL příkazu. Na druhém řádku se výsledný SQL příkaz pošle do databáze. Problémem tohoto kódu je, že data zvenku, v tomto případě obsah proměnné `$studentName`, se stanou součástí SQL příkazu.
 
-First let's see what the SQL statement looks like if we insert a student named John:
+Nejprve se podívejme, jak bude SQL příkaz vypadat v případě, že vkládáme studenta jménem Jan:
 
-    INSERT INTO Students (Name) VALUES ('John');
+    INSERT INTO Students (Name) VALUES ('Jan');
 
-This does exactly what we want: it inserts John into the Students table.
+Dělá přesně to, co chceme: vloží Jana do tabulky _Students_.
 
-Now we insert little Bobby Tables, by setting `$studentName` to `Robert'); DROP TABLE Students;--`. The SQL statement becomes:
+Nyní budeme chtít vložit Bobbyho Tablese tím, že `$studentName` nastavíme na `Robert'); DROP TABLE Students;--`. SQL příkaz bude vypadat takto:
 
     INSERT INTO Students (Name) VALUES ('Robert'); DROP TABLE Students;--');
 
-This inserts Robert into the Students table. However, the INSERT statement is now followed by a DROP TABLE statement which removes the entire Students table. Ouch!
+Tím se Robert vloží do tabulky _Students_. Jenže za příkazem `INSERT` teď následuje příkaz `DROP TABLE`, který smaže celou tabulku _Students_. Jauvajs!
 
 
-# How to avoid Bobby Tables
+# Jak se nenechat nachytat Bobbym Tablesem
 
-There is only one way to avoid Bobby Tables attacks
+Existuje jediný způsob, jak se vyhnout útokům tohoto typu.
 
-* Do not create SQL statements that include outside data.
-* Use parameterized SQL calls.
+* Nevyrábějte SQL příkazy, které obsahují data zvenčí.
+* Používejte parametrizované SQL dotazy.
 
-That's it. Don't try to escape invalid characters. Don't try to do it yourself. Learn how to use parameterized statements. Always, every single time.
+To je vše. Nezkoušejte escapovat neplatné znaky. Nezkoušejte si to ošetřit sami. Naučte se používat parametrizované příkazy. Vždycky, úplně pokaždé.
 
-The strip gets one thing crucially wrong. The answer is not to "sanitize your database inputs" yourself. It is prone to error.
+V onom komiksu je jedna věc zásadně špatně. Řešením není sami „ošetřovat databázové vstupy“. To je náchylné k chybám.
