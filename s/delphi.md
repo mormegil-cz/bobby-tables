@@ -1,7 +1,7 @@
 Delphi
 ======
 
-To use a prepared statement, do something like this:
+Pro použití předpřipraveného dotazu použijte něco jako:
 
     query.SQL.Text := 'update people set name=:Name where id=:ID';
     query.Prepare;
