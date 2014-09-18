@@ -28,9 +28,9 @@ GetOptions(
 
 -d $buildpath && -w $buildpath or die;
 
-my $home         = decode 'UTF-8', __('Home');
-my $translations = decode 'UTF-8', __('Translations');
-my $about        = decode 'UTF-8', __('About');
+my $home         = decode 'UTF-8', 'Domů';
+my $translations = decode 'UTF-8', 'Překlady';
+my $about        = decode 'UTF-8', 'O webu';
 
 my $pages = [
     index        => $home,
@@ -62,7 +62,7 @@ MAIN: {
             return sub {
                 my ($key) = @_;
                 return '' if $key eq '';
-                my $value = __x(encode('UTF-8', $key), currlang => $arg);
+                my $value = encode('UTF-8', $key);
                 return decode 'UTF-8', $value;
             };
         }, 1 # dynamic filter
