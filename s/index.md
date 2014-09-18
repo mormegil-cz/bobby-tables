@@ -1,68 +1,69 @@
-# Who is Bobby Tables?
+# Kdo je Bobby Tables?
 
-[From the webcomic _xkcd_](http://xkcd.com/327/)
+[Z webového komiksu _xkcd_](http://xkcd.com/327/)
 
-<a href="http://xkcd.com/327/"><img src="/img/xkcd.png" alt="xkcd Bobby Tables Cartoon" height="205" width="666" /></a>
+<a href="http://xkcd.com/327/"><img src="img/xkcd.png" alt="Komiks Bobby Tables z xkcd" height="205" width="666" /></a>
 
 <br clear="right">
 
-**School**: Hi, this is your son's school. We're having some computer trouble.
+**Škola**: Dobrý den, tady je škola vašeho syna. Máme nějaký problém s počítači.
 
-**Mom**: Oh, dear -- Did he break something?
+**Máma**: Jejda – rozbil něco?
 
-**School**: In a way. Did you really name your son `Robert'); DROP TABLE Students;--`?
+**Škola**: Svým způsobem. Opravdu jste syna pojmenovala `Robert'); DROP TABLE Students;--`?
 
-**Mom**: Oh. Yes. Little Bobby Tables we call him.
+**Máma**: Ach, ano. Říkáme mu Bobby Tables.
 
-**School**: Well, we've lost this year's student records. I hope you're happy.
+**Škola**: No, přišli jsme o letošní údaje o studentech. Doufám, že vás to těší.
 
-**Mom**: And I hope you've learned to sanitize your database inputs.
+**Máma**: A já doufám, že jste se naučili ošetřovat databázové vstupy.
 
 
 
-# Examples
+# Příklady
 
-See the sidebar to the left for your specific language.
+Podívejte se na svůj programovací jazyk v panelu vlevo.
 
-# Other resources
+# Další zdroje
 
 * [SQL Injection Myths and Fallacies](http://www.slideshare.net/billkarwin/sql-injection-myths-and-fallacies)
 * [How to Write Injection-Proof SQL](http://www.schneier.com/blog/archives/2008/10/how_to_write_in.html)
 * [Defending Against SQL Injection Attacks](http://download.oracle.com/oll/tutorials/SQLInjection/index.htm)
 * [Detecting Postgres SQL Injection](http://blog.endpoint.com/2012/06/detecting-postgres-sql-injection.html)
 
-# Patches welcome
+# Doplnění vítáno
 
-Don't see a programming language that you'd like to see represented?
-Please let me know if you have updates or additions through one of
-these methods, in decreasing order of preference.
+Nevidíte programovací jazyk, který byste chtěli mít pokrytý?
+Pokud máte nějaké aktualizace nebo doplnění, dejte nám vědět
+jedním z následujících způsobů (v sestupném pořadí vhodnosti).
 
-* Fork the [bobby-tables repository at github][repo], make your changes, and send me a pull request.
-* Add an issue in the [issue tracker][issues].
-* Email me, Andy Lester, at andy at petdance.com.
+* Forkujte [repository bobby-tables na Githubu][repo], proveďte změny a pošlete pull request.
+* Přidejte hlášení do [issue trackeru][issues].
+* Pošlete e-mail na Andy Lester, at andy at petdance.com.
 
 [repo]: https://github.com/petdance/bobby-tables
 [issues]: https://github.com/petdance/bobby-tables/issues
 
-# Help translating this site
+# Pomozte s překladem tohoto webu
 
-I'm looking for people to host non-English versions of this site.
-Much of the translation work for German, Russian and Spanish has
-been done.  If you're interested, please sign up for the 
-[bobby-tables mailing list][ml] on Google Groups and let us know.
+Hledají se zájemci o hostování verzí tohoto webu v jiných jazycích.
+Většina překladu do němčiny, ruštiny a španělštiny je hotova.
+Pokud máte zájem, přihlašte se do
+[e-mailové konference bobby-tables mailing list][ml] na Skupinách Google
+a dejte nám vědět.
 
 [ml]: https://groups.google.com/d/forum/bobby-tables
 
-To do
+Chybí
 =====
 
-* Explain why creating code from outside data is bad.
-* Potential speed win when reusing prepared statements.
+* Vysvětlení, proč je vytváření kódu na základě dat zvenčí špatné.
+* Možné urychlení při použivání předkompilovaných dotazů.
 
-Thanks
-======
+Poděkování
+==========
 
-Thanks to the following folks for their contributions:
+Děkujeme následujícím lidem za jejich příspěvky:
 
 * Richard Neill
 * [Kim Christensen](http://www.smukkekim.dk)
