@@ -1,18 +1,18 @@
 Ruby
 ====
 
-In Ruby on Rails using [ActiveRecord](http://guides.rubyonrails.org/active_record_querying.html):
+V Ruby on Rails pomocí [ActiveRecord](http://guides.rubyonrails.org/active_record_querying.html):
 
     Person.find :all, :conditions => ['id = ? or name = ?', id, name]
 
-or
+nebo
 
     Person.find_by_sql ['SELECT * from persons WHERE name = ?', name]
 
 
-Using [Ruby/DBI](http://ruby-dbi.rubyforge.org/): analog to [Perl](./perl.html).
+Pomocí [Ruby/DBI](http://ruby-dbi.rubyforge.org/): obdobně jako v [Perlu](./perl.html).
 
-To do
+Chybí
 -----
 
--   Add some narrative.
+-   Přidat povídání.
