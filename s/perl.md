@@ -1,7 +1,7 @@
 Perl
 ====
 
-Perl's [DBI](http://search.cpan.org/dist/DBI), available on the [CPAN](http://search.cpan.org), supports parameterized SQL calls.  Both the `do` method and `prepare` method support parameters ("placeholders", as they call them) for most database drivers. For example:
+Perlová knihovna [DBI](http://search.cpan.org/dist/DBI), dostupná na [CPANu](http://search.cpan.org), podporuje parametrizovaná SQL volání.  Metody `do` i `prepare` podporují u většiny databázových ovladačů parametry (nazývané _placeholders_). Například:
 
 
     $sth = $dbh->prepare("SELECT * FROM users WHERE email = ?");
@@ -11,36 +11,35 @@ Perl's [DBI](http://search.cpan.org/dist/DBI), available on the [CPAN](http://se
         [...]
     }
 
-However, you can't use parameterization for identifiers (table
-names, column names) so you need to use DBI's `quote_identifier()`
-method for that:
+Nemůžete však parametrizovat identifikátory (názvy tabulek a sloupcí),
+takže k tomu musíte použít metodu `quote_identifier()`:
 
-    # Make sure a table name we want to use is safe:
+    # Zajistit, že zamýšlený název tabulky je bezpečný:
     my $quoted_table_name = $dbh->quote_identifier($table_name);
 
-    # Assume @cols contains a list of column names you need to fetch:
+    # Předpokládejme, že @cols obsahuje seznam názvů sloupců, které chceme načíst:
     my $cols = join ',', map { $dbh->quote_identifier($_) } @cols;
 
     my $sth = $dbh->prepare("SELECT $cols FROM $quoted_table_name ...");
 
-You could also avoid writing SQL by hand by using [DBIx::Class](http://p3rl.org/DBIx::Class), [SQL::Abstract](http://p3rl.org/SQL::Abstract) etc to generate your SQL for you programmatically.
+Také se můžete vyhnout nutnosti psát SQL ručně díky [DBIx::Class](http://p3rl.org/DBIx::Class), [SQL::Abstract](http://p3rl.org/SQL::Abstract) apod., které můžou programově generovat SQL za vás.
 
-What is Taint mode?
--------------------
+Co je režim nakažení?
+---------------------
 
-Taint mode is a special set of security checks that Perl performs on data input into your program from external sources. The input data is marked as  tainted (untrusted) and may not be used in commands that would allow you to shoot yourself in the foot. See [the perlsec manpage](http://perldoc.perl.org/perlsec.html) for a detailed breakdown of what taint mode tracks.
+Režim nakažení (_Taint_) je speciální sada bezpečnostních kontrol, které Perl provádí nad každým vstupem dat do vašeho programu z externích zdrojů. Vstupní data jsou označená jako nakažená (nedůvěryhodná) a nelze je používat v příkazech, které by vám umožnily si ublížit. Podrobnější rozpis, co všechno režim nakažení kontroluje, najdete na [manuálové stránce perlsec](http://perldoc.perl.org/perlsec.html).
 
-To invoke taint mode:
+Pro vyvolání režimu nakažení:
 
-    # From the command line
+    # Z příkazové řádky
     perl -T program.pl
 
-    # At the top of your script
+    # Navrchu vašeho skriptu
     #!/usr/bin/perl -T
 
-When your script trips one of the taint checks your application will issue a fatal error message. For testing purposes `-t` will issue warnings instead of fatal errors. `-t` is not a substitute for `-T`.
+Pokud váš skript narazí na některou z kontrol nakažení, vaše aplikace skončí na fatální chybu. Kvůli testování dává `-t` varování místo fatálních chyb. `-t` není náhrada za `-T`.
 
-To do
+Chybí
 -----
 
-Explain how DBI supports taint mode, both inbound and outbound.
+Vysvětlit podporu režimu nakažení v DBI, jak na vstupech, tak výstupech.
