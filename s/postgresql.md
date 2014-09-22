@@ -1,12 +1,12 @@
 PostgreSQL
 ==========
 
-All of PostgreSQL's [procedural languages](http://www.postgresql.org/docs/current/static/xplang.html), which allow you to write functions and procedures inside the database, allow you to execute arbitrary SQL statements.
+Všechny [procedurální jazyky](http://www.postgresql.org/docs/current/static/xplang.html) PostgreSQL, které umožňují psát funkce a procedury uvnitř databáze, umožňují provádění libovolných SQL příkazů.
 
 PL/pgSQL
 --------
 
-The safest way to execute SQL inside a PL/pgSQL statement is just to do so:
+Nejbezpečnějším způsobem, jak provádět SQL uvnitř příkazu PL/pgSQL, je jednoduše takhle:
 
     CREATE OR REPLACE FUNCTION user_access (p_uname TEXT)
       RETURNS timestamp LANGUAGE plpgsql AS
@@ -16,7 +16,7 @@ The safest way to execute SQL inside a PL/pgSQL statement is just to do so:
     END
     $func$;
 
-For such a simple case, you're actually better off writing a pure SQL function:
+V takovém jednoduchém příkladu na tom vlastně budete líp s čistě SQL funkcí:
 
     CREATE OR REPLACE FUNCTION user_access (p_uname TEXT)
       RETURNS timestamp LANGUAGE sql AS
@@ -24,7 +24,7 @@ For such a simple case, you're actually better off writing a pure SQL function:
         SELECT accessed_at FROM users WHERE username = $1
     $func$;
 
-But sometimes you have to do more complicated things. Perhaps you dynamically add `WHERE` clause expressions based on input. In such a case, you'll end up using PL/pgSQL's [`EXECUTE`](http://www.postgresql.org/docs/current/interactive/plpgsql-statements.html#PLPGSQL-STATEMENTS-EXECUTING-DYN) syntax. Here's an example with an SQL injection vulnerability:
+Někdy ale potřebujete dělat složitější věci. Třeba dynamicky přidáváte `WHERE` klauzule podle vstupu. V takovém případě skončíte u PL/pgSQL příkazu [`EXECUTE`](http://www.postgresql.org/docs/current/interactive/plpgsql-statements.html#PLPGSQL-STATEMENTS-EXECUTING-DYN). Tady je příklad, který je zranitelný SQL injection:
 
     CREATE OR REPLACE FUNCTION get_users(p_column TEXT, p_value TEXT)
       RETURNS SETOF users LANGUAGE plpgsql AS
@@ -40,7 +40,7 @@ But sometimes you have to do more complicated things. Perhaps you dynamically ad
     END
     $func$;
 
-Both the `p_column` and the `p_value` arguments are vulnerable. One way to avoid this problem is to use the `quote_ident()` function to quote SQL identifiers (`p_column` in this case) and `quote_lteral()` and quote literal values:
+Oba parametry `p_column` i `p_value` jsou zranitelné. Jedním způsobem, jak se tomuto problému vyhnout, je použít funkci `quote_ident()` k uvození SQL identifikátorů (v tomto případě `p_column`) a `quote_literal()` k uvození literálů:
 
     CREATE OR REPLACE FUNCTION get_users(p_column TEXT, p_value TEXT)
       RETURNS SETOF users LANGUAGE plpgsql AS
@@ -56,8 +56,8 @@ Both the `p_column` and the `p_value` arguments are vulnerable. One way to avoid
     END;
     $func$;
 
-It's quite a bit easier to read, too!
-Better yet, employ the `USING` clause of the [`EXECUTE`](http://www.postgresql.org/docs/current/interactive/plpgsql-statements.html#PLPGSQL-STATEMENTS-EXECUTING-DYN) command for values (available since v8.4):
+Také se to o něco snadněji čte!
+Ještě lepší je u hodnot využívat klauzuli `USING` v příkazu [`EXECUTE`](http://www.postgresql.org/docs/current/interactive/plpgsql-statements.html#PLPGSQL-STATEMENTS-EXECUTING-DYN) (dostupná od v8.4):
 
     CREATE OR REPLACE FUNCTION get_users(p_column TEXT, p_value TEXT)
       RETURNS SETOF users LANGUAGE plpgsql AS
@@ -73,19 +73,19 @@ Better yet, employ the `USING` clause of the [`EXECUTE`](http://www.postgresql.o
     END;
     $func$;
 
-This form avoids the run-time overhead of converting values to text and back in addition to protecting against SQLi.
+V této podobě kromě ochrany proti SQLi získáte i lepší výkon bez režie převádění hodnot na text a zpět.
 
 
 PL/Perl
 -------
 
-TODO.
+Chybí
 
 PL/Python
 ---------
 
-TODO.
+Chybí
 
 ### PL/Tcl
 
-TODO.
+Chybí
