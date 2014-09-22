@@ -1,31 +1,31 @@
 Python
 ======
 
-Using the [Python DB API](http://wiki.python.org/moin/DatabaseProgramming/), don't do this:
+Při použití [Python DB API](http://wiki.python.org/moin/DatabaseProgramming/) nedělejte následující:
 
-    # Do NOT do it this way.
+    # Takhle to NEDĚLEJTE.
     cmd = "update people set name='%s' where id='%s'" % (name, id)
     curs.execute(cmd)
 
-Instead, do this:
+Místo toho použijte:
 
     cmd = "update people set name=%s where id=%s"
     curs.execute(cmd, (name, id))
 
-Note that the placeholder syntax depends on the database you are using.
+Uvědomte si, že syntaxe náhrad závisí na databázi, kterou používáte.
 
-    'qmark'         Question mark style,
-                    e.g. '...WHERE name=?'
-    'numeric'       Numeric, positional style,
-                    e.g. '...WHERE name=:1'
-    'named'         Named style,
-                    e.g. '...WHERE name=:name'
-    'format'        ANSI C printf format codes,
-                    e.g. '...WHERE name=%s'
-    'pyformat'      Python extended format codes,
-                    e.g. '...WHERE name=%(name)s'
+    'qmark'         Otazníky,
+                    např. '...WHERE name=?'
+    'numeric'       Číslované, poziční,
+                    např. '...WHERE name=:1'
+    'named'         Pojmenované,
+                    např. '...WHERE name=:name'
+    'format'        Formátovací příkazy z ANSI C,
+                    např. '...WHERE name=%s'
+    'pyformat'      Rozšířené formátovací příkazy Pythonu,
+                    např. '...WHERE name=%(name)s'
 
-The values for the most common databases are:
+Hodnoty pro nejběžnější databáze jsou:
 
     >>> import MySQLdb; print MySQLdb.paramstyle
     format
@@ -34,11 +34,11 @@ The values for the most common databases are:
     >>> import sqlite3; print sqlite3.paramstyle
     qmark
 
-So if you are using MySQL or PostgreSQL, use `%s` (even for numbers and
-other non-string values!) and if you are using SQLite use `?`
+Takže pokud běžíte na MySQL nebo PostgreSQL, používejte `%s` (i pro čísla a další
+neřetězcové hodnoty!) a pokud běžíte na SQLite, používejte `?`.
 
 
-To do
+Chybí
 -----
 
--   Add some narrative.
+-   Přidat povídání.
