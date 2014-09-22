@@ -1,7 +1,7 @@
 PL/SQL
 ======
 
-Examples assume the following table structure:
+V příkladech předpokládáme následující tabulkovou strukturu:
 
     CREATE TABLE users (
         username VARCHAR2(8) UNIQUE,
@@ -14,10 +14,10 @@ Examples assume the following table structure:
     INSERT INTO users VALUES ('albundy',  sysdate - 3,  0);
     INSERT INTO users VALUES ('donduck',  sysdate - 18, 0);
 
-Always prefer static SQL when possible
---------------------------------------
+Pokud je to možné, vždy preferujte statické SQL
+-----------------------------------------------
 
-Static SQL leaves no room for SQL injection.
+Ve statickém SQL vůbec SQL injection nehrozí.
 
     CREATE OR REPLACE FUNCTION user_access (
         p_uname IN VARCHAR2
@@ -31,23 +31,23 @@ Static SQL leaves no room for SQL injection.
 
 
     SELECT user_access('janihur')
-      AS "JANIHUR LAST SEEN" FROM DUAL;
+      AS "POSLEDNÍ PŘIHLÁŠENÍ JANIHURA" FROM DUAL;
 
-    JANIHUR LAST SEEN
+    POSLEDNÍ PŘIHLÁŠENÍ JANIHURA
     -------------------
     2011-08-03 17:11:24
 
     SELECT user_access('whocares'' or superuser = 1 or username = ''whocares') 
-      AS "SUPERUSER LAST SEEN" FROM DUAL;
+      AS "POSLEDNÍ PŘIHLÁŠENÍ SUPERUSERA" FROM DUAL;
 
-    SUPERUSER LAST SEEN
+    POSLEDNÍ PŘIHLÁŠENÍ SUPERUSERA
     -------------------
 
 
-If you need dynamic SQL avoid string concatenation when possible
-----------------------------------------------------------------
+Když potřebujete dynamické SQL, tak se pokud možno vyhněte spojování řetězců
+----------------------------------------------------------------------------
 
-String concatenation opens doors to possible SQL injection exploits:
+Spojování řetězců otvírá možnost SQL injection:
 
     CREATE OR REPLACE FUNCTION user_access (
         p_uname IN VARCHAR2
@@ -63,20 +63,20 @@ String concatenation opens doors to possible SQL injection exploits:
 
 
     SELECT user_access('janihur')
-      AS "JANIHUR LAST SEEN" FROM DUAL;
+      AS "POSLEDNÍ PŘIHLÁŠENÍ JANIHURA" FROM DUAL;
 
-    JANIHUR LAST SEEN
+    POSLEDNÍ PŘIHLÁŠENÍ JANIHURA
     -------------------
     2011-08-03 17:11:24
 
     SELECT user_access('whocares'' or superuser = 1 or username = ''whocares') 
-      AS "SUPERUSER LAST SEEN" FROM DUAL;
+      AS "POSLEDNÍ PŘIHLÁŠENÍ SUPERUSERA" FROM DUAL;
 
-    SUPERUSER LAST SEEN
+    POSLEDNÍ PŘIHLÁŠENÍ SUPERUSERA
     -------------------
     2011-07-22 17:11:24
 
-Instead use bind variables:
+Místo toho používejte vázací proměnné:
 
 
     CREATE OR REPLACE FUNCTION user_access (
@@ -93,24 +93,24 @@ Instead use bind variables:
 
 
     SELECT user_access('janihur')
-      AS "JANIHUR LAST SEEN" FROM DUAL;
+      AS "POSLEDNÍ PŘIHLÁŠENÍ JANIHURA" FROM DUAL;
 
-    JANIHUR LAST SEEN
+    POSLEDNÍ PŘIHLÁŠENÍ JANIHURA
     -------------------
     2011-08-03 17:11:24
 
     SELECT user_access('whocares'' or superuser = 1 or username = ''whocares') 
-      AS "SUPERUSER LAST SEEN" FROM DUAL;
+      AS "POSLEDNÍ PŘIHLÁŠENÍ SUPERUSERA" FROM DUAL;
 
-    SUPERUSER LAST SEEN
+    POSLEDNÍ PŘIHLÁŠENÍ SUPERUSERA
     -------------------
 
-Implicit Data Type Conversion Injection
----------------------------------------
+Injection pomocí implicitní konverze datových typů
+--------------------------------------------------
 
-Also NLS session parameters (`NLS_DATE_FORMAT`, `NLS_TIMESTAMP_FORMAT`, `NLS_TIMESTAMP_TZ_FORMAT`, `NLS_NUMERIC_CHARACTER`) can be used to modify or inject SQL statements.
+K pozměnění SQL příkazů lze zneužít i NLS parametry session (`NLS_DATE_FORMAT`, `NLS_TIMESTAMP_FORMAT`, `NLS_TIMESTAMP_TZ_FORMAT`, `NLS_NUMERIC_CHARACTER`).
 
-In next example data type conversion takes place when `p_since` is implicitly converted to a string for concatenation. Note how the value of `NLS_DATE_FORMAT` affects to the query string in `users_since()` function!
+V následujícím příkladu dochází ke konverzi datových typů, když se `p_since` implicitně zkonvertujte na řetězec, aby se dal připojit. Všimněte si, jak hodnota `NLS_DATE_FORMAT` ovlivňuje text dotazu ve funkci `users_since()`!
 
     ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';
 
@@ -136,29 +136,29 @@ In next example data type conversion takes place when `p_since` is implicitly co
     /
 
 
-    ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD"SUPRISE!"';
-    SELECT COLUMN_VALUE AS "REGULARS" FROM TABLE(users_since(sysdate - 30));
+    ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD"PŘEKVAPENÍ!"';
+    SELECT COLUMN_VALUE AS "BĚŽNÍ" FROM TABLE(users_since(sysdate - 30));
 
     v_query = SELECT username FROM users WHERE superuser = 0 and accessed_at >
-    '2011-07-04SUPRISE!' order by accessed_at desc
+    '2011-07-04PŘEKVAPENÍ!' order by accessed_at desc
 
-    REGULARS
+    BĚŽNÍ
     --------
     janihur
     albundy
     donduck
 
     ALTER SESSION SET NLS_DATE_FORMAT = '"'' or superuser = 1 or username = ''whocares"';
-    SELECT COLUMN_VALUE AS "SUPERUSER IS" FROM TABLE(users_since(sysdate - 30));
+    SELECT COLUMN_VALUE AS "SUPERUŽIVATELÉ" FROM TABLE(users_since(sysdate - 30));
 
     v_query = SELECT username FROM users WHERE superuser = 0 and accessed_at > ''
     or superuser = 1 or username = 'whocares' order by accessed_at desc
 
-    SUPERUSE
+    SUPERUŽIVATELÉ
     --------
     petdance
 
-The remedy is to set the format modifier explicitly: `to_char(p_since, 'YYYY-MM-DD')`.
+Nápravou je explicitní uvedení formátu: `to_char(p_since, 'YYYY-MM-DD')`.
 
     ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';
 
@@ -183,15 +183,15 @@ The remedy is to set the format modifier explicitly: `to_char(p_since, 'YYYY-MM-
     END;
     /
 
-Now the value of NLS parameter `NLS_DATE_FORMAT` is ignored during the query.
+Teď se hodnota NLS parametru `NLS_DATE_FORMAT` v dotazu ignoruje:
 
-    ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD"SUPRISE!"';
-    SELECT COLUMN_VALUE AS "REGULARS" FROM TABLE(users_since(sysdate - 30));
+    ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD"PŘEKVAPENÍ!"';
+    SELECT COLUMN_VALUE AS "BĚŽNÍ" FROM TABLE(users_since(sysdate - 30));
 
     v_query = SELECT username FROM users WHERE superuser = 0 and accessed_at >
     '2011-07-04' order by accessed_at desc
 
-    REGULARS
+    BĚŽNÍ
     --------
     janihur
     albundy
