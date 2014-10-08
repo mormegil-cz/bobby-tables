@@ -1,14 +1,14 @@
-# Translations
+# Překlady
 
-The following natural languages are supported on bobby-tables.com:
+Vedle českého překladu na bobby-tables.cz existují následující překlady na bobby-tables.com:
 
-* [English](http://bobby-tables.com/) (native)
-* [German](http://bobby-tables.com/de_DE/) (fairly current)
-* [Russian](http://bobby-tables.com/ru_RU/) (just starting)
+* [angličtina](http://bobby-tables.com/) (originál)
+* [němčina](http://bobby-tables.com/de_DE/) (vcelku aktuální)
+* [ruština](http://bobby-tables.com/ru_RU/) (v počáteční fázi)
 
-As the content is available under the free Creative Commons Attribution-ShareAlike 3.0 License, you can translate the project to your language and host it somewhere. There are currently no plans to host further languages directly at bobby-tables.com. See [this explanation in a mailing-list post][1] for details.
+Jelikož obsah je dostupný za podmínek svobodné licence Creative Commons Uveďte autora-Zachovejte licenci, můžete projekt přeložit do jiného jazyka a někde ho vystavit. V současnosti se neplánuje hostovat další jazyky přímo na bobby-tables.com. Více informací je v [této zprávě v e-mailové konferenci][1].
 
-If you are interested, please contact the [bobby-tables mailing list][2] and ask a team member about how you can help.
+Pokud máte zájem, napište do [e-mailové konference bobby-tables][2] a zeptejte se, jak můžete pomoci.
 
 [1]: https://groups.google.com/d/msg/bobby-tables/q5C6c8o9FLc/qNcH9FGVZWAJ
 [2]: https://groups.google.com/forum/#!forum/bobby-tables
